@@ -98,8 +98,24 @@ npm run test
 
 ## Docker Deployment
 
-To build and run the application as a Docker container:
+This repository uses a production-ready multi-stage Docker build.
+
+1. Build the image:
 ```bash
-docker build -t express-boilerplate .
-docker run -p 3000:3000 --env-file .env express-boilerplate
+docker build -t backend .
 ```
+
+2. Apply database migrations safely before starting the app in production:
+```bash
+docker run --rm --env-file .env backend npm run prisma:migrate:prod
+```
+
+3. Run the production container:
+```bash
+docker run --rm -p 3000:3000 --env-file .env --name backend backend
+```
+
+### Notes
+- Do not use `npx prisma migrate dev` in production.
+- Use `npm run prisma:migrate:prod` or `npm run prisma:deploy` in your CI / deployment pipeline.
+- Keep migration files in version control and review generated SQL before deploying.

@@ -12,7 +12,8 @@
     "prisma:format": "npx prisma format",
     "prisma:status": "npx prisma migrate status",
     "prisma:migrate": "npx prisma migrate dev",
-    "prisma:deploy": "npx prisma migrate deploy"
+    "prisma:deploy": "npx prisma migrate deploy",
+    "prisma:migrate:prod": "npx prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
